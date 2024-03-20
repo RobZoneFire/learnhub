@@ -4,6 +4,9 @@ session_start();
 // Include the database connection file
 include('includes/database.php');
 
+// Set the timezone to Philippines
+date_default_timezone_set('Asia/Manila');
+
 if (!isset($_SESSION['email']) || empty($_SESSION['email']) || !isset($_SESSION['type'])) 
 {
     header("Location: index.php");
