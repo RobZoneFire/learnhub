@@ -222,6 +222,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       ]));
   </script>
 
+  <style>
+    .adjustable-input {
+      overflow-y: hidden;
+      padding-right: 20px;
+      resize: none;
+    }
+  </style>
+
   <meta name="csrf-token" content="sw6FfbyLs8IzrzOP3Q2H2wXPeXnjRUyUxxBfrTdY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>School Management System</title>
@@ -317,19 +325,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
               <div class="container">
                 <div class="col-md-4 offset-md-4 form">
                   <form action="update_video.php" method="post" enctype="multipart/form-data">
-                    <h2 class="text-center">Update Video</h2><br>
+                    <h2 class="text-prime-blue"><center>Update Video</center></h2>
+                    <hr class="hr-isign">
                     <input type="hidden" name="update_id" value="<?php echo $update_id; ?>">
+
                     <div class="form-group">
                         <label for="title">Video Title:</label>
-                        <input type="text" class="form-control" placeholder="Enter Video Title" name="update_title" value="<?php echo $video_title; ?>" autocomplete="off" required>
+                        <textarea class="form-control adjustable-input" placeholder="Enter Video Title" name="update_title" rows="1" autocomplete="off" required><?php echo $video_title; ?></textarea>
                     </div>
+
                     <div class="form-group">
                         <label for="">Video Description:</label>
-                        <input type="text" class="form-control" placeholder="Enter Video Description" name="update_video_description" value="<?php echo $video_description; ?>" autocomplete="off" required>
+                        <textarea class="form-control adjustable-input" placeholder="Enter Video Description" name="update_video_description" rows="1" autocomplete="off" required><?php echo $video_description; ?></textarea>
                     </div>
+
                     <div class="form-group">
                         <label for="">Youtube Video Link:</label>
-                        <input type="text" class="form-control" placeholder="Enter Youtube Video Link" name="update_video" value="<?php echo $video_link; ?>" autocomplete="off" required>
+                        <textarea class="form-control adjustable-input" placeholder="Enter Youtube Video Link" name="update_video" rows="1" autocomplete="off" required><?php echo $video_link; ?></textarea>
                     </div>
                     <?php
                     if (isset($error_message)) 
@@ -358,6 +370,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       </div>
     </div>
     </div>    
+    <script>
+      // Function to adjust textarea height based on content
+      function adjustTextareaHeight(textarea) {
+          textarea.style.height = 'auto'; 
+          textarea.style.height = (textarea.scrollHeight) + "px";
+      }
+
+      // Get all textareas with the class adjustable-input
+      var textareas = document.querySelectorAll('.adjustable-input');
+
+      // Add event listener to each textarea
+      textareas.forEach(function(textarea) {
+          adjustTextareaHeight(textarea);
+
+          textarea.addEventListener('input', function() {
+              adjustTextareaHeight(textarea);
+          });
+      });
+    </script>
     <script type="text/javascript">
       var user =  JSON.parse(localStorage.getItem("user_data"));
       var name =  user ? user.user.username + ' - ' +  user.user.first_name + ' ' +   user.user.last_name : '';
